@@ -21,7 +21,6 @@ unsigned char p_hemorragia = 0;
 unsigned char cont_hemorragia = 30;
 unsigned char borde_hemorragia = 1;
 
-
 // logica juego
 unsigned char object_in_hand = 0;
 unsigned char zombi_dress = 0;
