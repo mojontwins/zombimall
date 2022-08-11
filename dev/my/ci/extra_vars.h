@@ -32,8 +32,8 @@ unsigned char moto_open = 0;
 unsigned char aux_sotano = 0;
 unsigned char guantes_equipados = 0;
 
-unsigned char justlit = 0;
-unsigned char halo = 0;
+unsigned char justlit;
+unsigned char halo;
 unsigned char prxc;
 unsigned char pryc;
 unsigned char ovl_x;
