@@ -1124,7 +1124,7 @@ unsigned char get_tile_from_object(unsigned char obj) {
 // 		.loop_find_object_by_npant
 // 			ld a, 8								;; cargamos total de elementos del array
 // 			cp b								;; a = a - b
-// 			jp z, loop_find_object_exit_by_npant         ;; si es 0, finaliza
+// 			jr z, loop_find_object_exit_by_npant         ;; si es 0, finaliza
 // 												;; sino
 			
 // 			;; comprobar si estamos en la misma pantalla del elemento del array
@@ -1136,7 +1136,7 @@ unsigned char get_tile_from_object(unsigned char obj) {
 // 			ld c, (hl)							;; cargamos contenido del array que apunta hl
 // 			ld a, (_n_pant)						;; cargamos n_pant en a
 // 			cp c 								;; a = a - c
-// 			jp z, found_object		  			;; si es 0, esta en la pantalla actual, salta a pintar objeto
+// 			jr z, found_object		  			;; si es 0, esta en la pantalla actual, salta a pintar objeto
 // 												;; sino
 
 // 			;; incrementar el indice acumulador por 6 elementos, estructura tiene 6 bytes
@@ -1146,7 +1146,7 @@ unsigned char get_tile_from_object(unsigned char obj) {
 // 			ld (_aux_result), a					;; guaramos el acumulador en memoria
 
 // 			inc b								;; b++
-// 			jp loop_find_object_by_npant		;; vuelta al inicio del bucle
+// 			jr loop_find_object_by_npant		;; vuelta al inicio del bucle
 // 		.found_object
 // 			ret
 // 		.loop_find_object_exit_by_npant
@@ -1162,11 +1162,11 @@ unsigned char get_tile_from_object(unsigned char obj) {
 // 		call _get_object_from_n_pant
 // 			ld a, (hl)							;; comprobamos si HL = 100, entonces no hay objeto
 // 			cp 100
-// 			jp z, loop_find_object_exit
+// 			jr z, loop_find_object_exit
 
 // 			ld a, (hl)							;; cargamos puntero a estructura de objeto del array
 // 			add a, 3							;; sumamos 3 bytes para acceder a st
-// 			jp z, loop_find_object_exit			;; si a == 0, estado objeto cogido, salimos, no hay dos objetos custom en misma pantalla
+// 			jr z, loop_find_object_exit			;; si a == 0, estado objeto cogido, salimos, no hay dos objetos custom en misma pantalla
 				
 // 			inc hl								;; incrementamos en 1 byte para acceder a x en la estructura del array
 // 			ld a, (hl)							;; cargamos contenido de x en a
@@ -1215,7 +1215,7 @@ unsigned char catch_custom_object(unsigned char obj, unsigned char c) {
 			_n = 0;
 			_x = p_tx;
 			_y = p_ty;
-			_t = 0;
+			_t = 1;
 			update_tile();
 			return custom_objects[rdn].c;
 		}

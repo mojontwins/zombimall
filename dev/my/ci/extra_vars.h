@@ -28,8 +28,9 @@ unsigned char closed_doors = 0;
 unsigned char electric_circuit_active = 0;
 unsigned char generator_on = 0;
 unsigned char moto_open = 0;
-unsigned char basement_light_on = 0;
+//unsigned char basement_light_on = 0;
 unsigned char aux_sotano = 0;
+unsigned char guantes_equipados = 0;
 
 unsigned char justlit = 0;
 unsigned char halo = 0;
@@ -43,12 +44,6 @@ unsigned char discovered = 0;
 unsigned int dress_count = 0;
 unsigned char infection = 0;
 
-// auxiliares de calculo asm
-unsigned int aux_result;
-unsigned char _c;
-
-
-unsigned char test[8] = {3,3,3,2,3,3,3,3};
 
 typedef struct {
     unsigned char np, x, y, st, t, c;
@@ -64,11 +59,3 @@ CUSTOM_OBJECTS custom_objects[8] = {
     {12, 1, 2, 1, 28, 0}, //manguera
     {31, 12, 8, 1, 29, 0} //bidon
 };
-
-
-//objets type values
-
-
-// comprobar bien del dejar objetos. aveces no actualiza bien, y la llave se vuelve loca.
-// se dispara el arma antes de cargarla
-// ha vuelto a salir la llave. Seguramente al usarla no la puse a 0

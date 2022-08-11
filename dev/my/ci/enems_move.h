@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
  case 5:
-       active = 0;
+       active = 1;
        if (must_draw_element(_en_y >> 4) == 0) {
               active = 0;
               break;
@@ -50,6 +50,6 @@
        } else {
               flags[0] = 1;
        }
-       if (zombi_dress == 0) sp_Border(BLACK);
+       //if (zombi_dress == 0) sp_Border(BLACK);
        vision_zombi = 0;
        break;

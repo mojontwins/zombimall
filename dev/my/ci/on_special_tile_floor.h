@@ -16,7 +16,7 @@ if (qtile (p_tx, p_ty) == 11) {
         gpx = 11 << 4; p_x = gpx << FIXBITS;
         gpy = 2 << 4; p_y = gpy << FIXBITS;
   } else if (floor == 1) {
-      if (basement_light_on == 1) {
+      if (object_in_hand == 9 || electric_circuit_active == 1) {
             floor = 0;
             n_pant = 29;
             gpx = 11 << 4; p_x = gpx << FIXBITS;

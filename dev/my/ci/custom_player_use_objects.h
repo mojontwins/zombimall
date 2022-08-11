@@ -12,10 +12,7 @@ if (rda == 0) {
     if (rdb == 6) { //guantes
         textbox(11);
         catch_custom_object(6, 0);
-        if (object_in_hand != 0) {
-            leave_custom_object();
-        } 
-        object_in_hand = 6;
+        guantes_equipados = 1;
         rdc = 1;
     }
 
@@ -29,7 +26,7 @@ if (rda == 0) {
         rdc = 1;
     }
 
-//TODO estudiar este caso, esta raro la parte de rdd
+
     if (rdb == 2) { //bidon
         if (object_in_hand == 5) {
             textbox(14);
@@ -38,13 +35,13 @@ if (rda == 0) {
             catch_custom_object(3, 1);
         } else {
             textbox(13);
-            rdd = catch_custom_object(2, 0);  // <- cuando bidon en mano y manguera en suelo, no devuelve rdd == 0, deberia de devolverlo. ver codigo asm para retorno de C
+            rdd = catch_custom_object(2, 0);  
             if (object_in_hand != 0) {
                 leave_custom_object();
             } 
-            if (_c == 0) {
+            if (rdd == 0) {
                 object_in_hand = 2;
-            } else if (_c == 1) {
+            } else if (rdd == 1) {
                 object_in_hand = 3;
             } else {
                 object_in_hand = 4;
@@ -72,13 +69,12 @@ if (rda == 0) {
         rdc = 1;
     }
 
-    if (rdb == 13) { 
+    if (rdb == 13 && zombi_dress == 0) { 
         zombi_dress = 1; //nos vestimos de zombi
         textbox (1);
-        sp_Border(YELLOW);
+        //sp_Border(YELLOW);
         if (p_hemorragia == 1) {
             invalidate_viewport();
-            //MUERTE POR SUBNORMAL
             textbox(25);
             success = playing = 0;
             p_killed = 1; 
@@ -102,15 +98,25 @@ if (rda == 0) {
         rdc = 1;
     }
     if (rdb == 19 && electric_circuit_active == 1) {
-        closed_doors = 1;
-        textbox(21);
-        rdc = 1;
+        if (closed_doors == 0) {
+            closed_doors = 1;
+            textbox(21);
+            rdc = 1;
+        } else {
+            textbox(39);
+            textbox(40);
+            textbox(41);
+            textbox(42);
+            textbox(43);
+            rdc = 1;
+        }
+        
     } 
 
     if (rdb == 15) {
         if (generator_on == 1) { // enciende los fusibles. Opciones: guantes ok, sin guantes KO
-            if (object_in_hand == 6) {
-                destroy_object_in_hand(6);
+            if (guantes_equipados == 1) {
+                //destroy_object_in_hand(6);
                 electric_circuit_active = 1;
                 textbox(3);
             } else {
@@ -143,9 +149,8 @@ if (rda == 0) {
 
     if (rdb == 7) { //pila
         if (object_in_hand == 8) {//encender lampara
-            basement_light_on = 1;
-            object_in_hand = 9;
             destroy_object_in_hand(7);
+            object_in_hand = 9;
             catch_custom_object(9, 1);
             textbox(8);
         } else {
@@ -161,10 +166,8 @@ if (rda == 0) {
 
     if (rdb == 8) { //lampara
         if (object_in_hand == 7) {//encender lampara
-            basement_light_on = 1;
             destroy_object_in_hand(7);
             object_in_hand = 9;
-            //pintar losa
             catch_custom_object(9, 1);
             textbox(8);
         } else {
@@ -229,7 +232,6 @@ if (rda == 0) {
         } else if (zombi_dress == 1) {
             zombi_dress = 0;
             dress_count = 0;
-            infection = 0;
             textbox(23);
         } else {
             textbox(24);

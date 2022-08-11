@@ -1,7 +1,7 @@
 // MTE MK1 (la Churrera) v5.0
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
-/*
+
 if (p_hemorragia == 1) {
     if (cont_hemorragia == 0) {
         p_life--;
@@ -19,8 +19,8 @@ if (p_hemorragia == 1) {
         borde_hemorragia = 0;
     }
 }
-*/
 
+/*
 #asm
         ld  a, (_p_hemorragia)
         or  a
@@ -51,12 +51,24 @@ if (p_hemorragia == 1) {
         ld  a, 1                            // A = 1
         sub c                               // A = 1 - borde_hemorragia (pasa de 0 a 1 y de 1 a 0)
         ld  (_borde_hemorragia), a          // borde_hemorragia = 1 - borde_hemorragia
-        asl a                               // A = A << 1: 0->0, 1->2
+        sla a                               // A = A << 1: 0->0, 1->2
         out (254), a                        // BORDER A
 
     .p_hemorragia_done
-#endasm
+#endasm */
 
+if (zombi_dress == 1) {
+    #asm
+    ld a, 4
+    out (254), a                        // BORDER A
+    #endasm
+    
+} else {
+    #asm
+    ld a, 0
+    out (254), a                        // BORDER A
+    #endasm
+}
 /*
 if (p_life <= 0 || p_life > 100) {
    success = playing = 0;
@@ -96,7 +108,7 @@ if (zombi_dress == 1) {
     dress_count++;
 }
 
-if (dress_count >= 2000) {
+if (dress_count >= 1200) {
     if (infection == 0) {
         textbox(36);
     } else if (infection == 1) {
@@ -112,9 +124,9 @@ if (dress_count >= 2000) {
 
 
 //halo
-if (halo) {
+if (halo == 1) {
 
-      if (justlit || prxc != ovl_x || pryc != ovl_y) {
+      if (justlit == 1 || prxc != ovl_x || pryc != ovl_y) {
         ovl_x = prxc; ovl_y = pryc;
         #asm
           call _ovl_draw_scr
